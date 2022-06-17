@@ -1,0 +1,12 @@
+{
+  "name": "Chrome Bee 001",
+  "repository": "https://github.com/sergystepanov/chrome-bee",
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+    },
+    {
+      "url": "heroku/go"
+    }
+  ]
+}
