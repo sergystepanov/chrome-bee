@@ -19,7 +19,7 @@ func main() {
 		port = defaultPort
 	}
 	log.Printf("Port: %v", port)
-	clientType := os.Getenv("CLIENT_TYPE")
+	clientType := strings.ToLower(os.Getenv("CLIENT_TYPE"))
 	log.Printf("Client: %v", clientType)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
@@ -32,7 +32,9 @@ func main() {
 	var handler func(w http.ResponseWriter, r *http.Request)
 	switch clientType {
 	case "chrome":
-		handler = chromeURL()
+		h, cancel := chromeURL()
+		defer cancel()
+		handler = h
 	case "go":
 		handler = netURL()
 	case "":
